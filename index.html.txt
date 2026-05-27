@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aay Vee International | Premium Girls Fashion Wear Manufacturer</title>
+    <style>
+        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --primary: #0A2540;       /* Royal Blue */
+            --secondary: #D4AF37;     /* Premium Gold */
+            --light: #F8FAFC;         /* Crisp Off-White */
+            --dark: #0F172A;          /* Slate Dark */
+            --text-muted: #64748B;    /* Neutral Slate Neutral */
+            --white: #FFFFFF;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(10, 37, 64, 0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(10, 37, 64, 0.15);
+        }
+
+        /* --- GLOBAL RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section {
+            padding: 100px 5%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- UTILITY COMPONENTS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin: 0 auto;
+        }
+
+        /* --- FIXED NAVIGATION BAR --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 12px 5%;
+            background-color: var(--primary);
+        }
+
+        header.scrolled .logo h1 {
+            color: var(--white);
+        }
+
+        header.scrolled .logo span {
+            color: var(--secondary);
+        }
+
+        header.scrolled nav ul a {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        header.scrolled nav ul a:hover, 
+        header.scrolled nav ul a.active {
+            color: var(--secondary);
+        }
+
+        header.scrolled .burger div {
+            background-color: var(--white);
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            display: block;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-top: -2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav ul a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        nav ul a:hover::after, 
+        nav ul a.active::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .burger div {
+            width: 28px;
+            height: 3px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        /* --- HERO PRESENTATION AREA --- */
+        #home {
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(10,37,64,0.95) 30%, rgba(15,23,42,0.8)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%230c2e4e" width="50" height="50"/><rect fill="%230a2540" x="50" width="50" height="50"/><rect fill="%230a2540" y="50" width="50" height="50"/><rect fill="%230c2e4e" x="50" y="50" width="50" height="50"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            padding: 0 5%;
+            transform: none;
+            opacity: 1;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-badge {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 6px 16px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .hero-content h2 {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            text-transform: capitalize;
+        }
+
+        .hero-content h2 span {
+            color: var(--secondary);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 40px;
+            max-width: 650px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- INFRASTRUCTURE & ADVANTAGES GRID --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 6px;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-top-color: var(--secondary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- CORPORATE PROFILE (ABOUT) --- */
+        #about {
+            background-color: var(--white);
+        }
+
+        .about-wrapper {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            border-left: 3px solid var(--secondary);
+            padding-left: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            line-height: 1.1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .about-media {
+            flex: 1;
+            position: relative;
+        }
+
+        .media-container {
+            width: 100%;
+            height: 450px;
+            background-color: var(--primary);
+            border-radius: 6px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Technical Blueprint Fallback Decorative Asset */
+        .media-container::before {
+            content: "REAL BABY";
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            letter-spacing: 10px;
+            position: absolute;
+        }
+
+        .brand-badge-overlay {
+            position: absolute;
+            bottom: -25px;
+            left: -25px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .brand-badge-overlay h4 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .brand-badge-overlay p {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        /* --- PRODUCT CATALOG & PORTFOLIO --- */
+        .catalog-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .filter-btn {
+            background-color: var(--white);
+            border: 1px solid rgba(10,37,64,0.1);
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, 
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image-frame {
+            height: 380px;
+            background-color: #E2E8F0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Elegant Abstract Grid Silhouette Vector for Fashion Fallback */
+        .product-image-frame::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: linear-gradient(45deg, rgba(10,37,64,0.05) 25%, transparent 25%), 
+                        linear-gradient(-45deg, rgba(10,37,64,0.05) 25%, transparent 25%);
+            background-size: 30px 30px;
+        }
+
+        .product-image-frame span {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            z-index: 1;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .product-info {
+            padding: 25px;
+            border-top: 1px solid rgba(10,37,64,0.05);
+        }
+
+        .product-tag {
+            color: var(--secondary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .product-info h3 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* --- CONTACT INTERFACE TERMINAL --- */
+        #contact {
+            background-color: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+        }
+
+        .contact-form-pane h3, 
+        .contact-info-pane h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(10,37,64,0.15);
+            border-radius: 4px;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            color: var(--dark);
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(10,37,64,0.05);
+        }
+
+        .contact-info-pane {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 50px 40px;
+            border-radius: 6px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-info-pane h3 {
+            color: var(--white);
+        }
+
+        .info-block {
+            margin-bottom: 35px;
+        }
+
+        .info-block h4 {
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .info-block p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .person-node {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .person-node:last-of-type {
+            border-bottom: none;
+        }
+
+        .person-name {
+            font-weight: 600;
+        }
+
+        .person-phone {
+            font-family: monospace;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .map-mock-container {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(255,255,255,0.05);
+            border: 1px dashed rgba(255,255,255,0.2);
+            border-radius: 4px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- GLOBAL FOOTER ARCHITECTURE --- */
+        footer {
+            background-color: #051424;
+            color: var(--white);
+            padding: 60px 5% 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .footer-content h2 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .footer-content p {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .footer-law {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.5);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* --- KEYFRAME ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 968px) {
+            .about-wrapper, 
+            .contact-container {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 50px;
+            }
+
+            .about-media {
+                width: 100%;
+                margin-top: 30px;
+            }
+
+            .hero-content h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: var(--primary);
+                z-index: 999;
+                padding: 100px 50px;
+                box-shadow: var(--shadow-lg);
+                transition: var(--transition);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            nav ul a {
+                color: var(--white);
+                font-size: 1.1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .footer-law {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="logo">
+            <h1>AAY VEE</h1>
+            <span>INTERNATIONAL</span>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li><a href="#catalog" class="nav-link">Collections</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="burger" id="menu-toggle" aria-label="Toggle Navigation Window">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="hero-content">
+            <div class="hero-badge">Official Brand: Real Baby</div>
+            <h2>30 Years of Excellence in <span>Girls Fashion Wear</span> Manufacturing</h2>
+            <p>Premium quality children's apparel produced with state-of-the-art infrastructure. Delivering high-capacity bulk orders to wholesale markets, distributors, and global exporters.</p>
+            <div class="hero-actions">
+                <a href="#catalog" class="btn btn-primary">View Collection</a>
+                <a href="#contact" class="btn btn-secondary">Wholesale Inquiry</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="advantages">
+        <div class="section-header">
+            <h2>Manufacturing Advantages</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">⚙️</span>
+                <h3>Advanced Machinery</h3>
+                <p>Equipped with state-of-the-art automated cutting, high-speed precise stitching, and premium finish equipment to maintain precision output alignment.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🏭</span>
+                <h3>Complete In-House Production</h3>
+                <p>Total raw material processing flow controlled inside our walls: pattern design, technical cutting, sewing, rigorous finishing, and commercial bulk packing.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">✂️</span>
+                <h3>Skilled Craftsmen</h3>
+                <p>Operated by dedicated textile masters ensuring structural safety, comfortable flat-lock stitching seams, and exact dimensional sizing metrics.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">✨</span>
+                <h3>Seasonal New Arrivals</h3>
+                <p>Rapid deployment of trend-focused catalog iterations tracking current international designs, color systems, and modern fashion updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-header">
+            <h2>About Our Enterprise</h2>
+        </div>
+        <div class="about-wrapper">
+            <div class="about-text">
+                <h3>Trusted Manufacturers for Girls’ Fashion Architecture</h3>
+                <p>Aay Vee International is a premier Ludhiana-based clothing industry leader producing elite lines of girls' clothing wear under the flagship brand <strong>Real Baby</strong>. With over three decades of manufacturing experience, we merge quality textiles with high-speed machinery.</p>
+                <p>Our operation processes advanced textiles—ranging from high-elasticity Hosiery Fabrics, woven Textile Fabrics, heavy-duty Denim, specialized Washing Fabrics, to premium Imported structural cloths—ensuring highly competitive retail performance.</p>
+                
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Years Field Legacy</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">In-House Workflow</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-media">
+                <div class="media-container"></div>
+                <div class="brand-badge-overlay">
+                    <h4>RB</h4>
+                    <p>Real Baby Premium</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalog">
+        <div class="section-header">
+            <h2>Product Showcase</h2>
+        </div>
+        
+        <div class="catalog-filters">
+            <button class="filter-btn active" data-filter="all">All Outfits</button>
+            <button class="filter-btn" data-filter="suits">Premium Suits</button>
+            <button class="filter-btn" data-filter="sets">Co-ord Sets</button>
+            <button class="filter-btn" data-filter="denim">Jacket & Denim</button>
+        </div>
+
+        <div class="catalog-grid">
+            <div class="product-card" data-category="suits">
+                <div class="product-image-frame"><span>Capri Suit Set</span></div>
+                <div class="product-info">
+                    <span class="product-tag">Hosiery / Textile</span>
+                    <h3>Capri Suits Collection</h3>
+                </div>
+            </div>
+            <div class="product-card" data-category="sets">
+                <div class="product-image-frame"><span>Skirt Top Combo</span></div>
+                <div class="product-info">
+                    <span class="product-tag">Imported / Fine Fabrics</span>
+                    <h3>Premium Skirt Tops</h3>
+                </div>
+            </div>
+            <div class="product-card" data-category="sets">
+                <div class="product-image-frame"><span>Designer Co-ord</span></div>
+                <div class="product-info">
+                    <span class="product-tag">Trending Fashion</span>
+                    <h3>Co-ord Sets Range</h3>
+                </div>
+            </div>
+            <div class="product-card" data-category="suits">
+                <div class="product-image-frame"><span>Palazzo Suit Set</span></div>
+                <div class="product-info">
+                    <span class="product-tag">Comfort Flow Textiles</span>
+                    <h3>Palazzo Suits Line</h3>
+                </div>
+            </div>
+            <div class="product-card" data-category="denim">
+                <div class="product-image-frame"><span>Jacket Suit Pack</span></div>
+                <div class="product-info">
+                    <span class="product-tag">Denim / Washing Fabrics</span>
+                    <h3>Jacket Suits Structure</h3>
+                </div>
+            </div>
+            <div class="product-card" data-category="suits">
+                <div class="product-image-frame"><span>Midi Elegance</span></div>
+                <div class="product-info">
+                    <span class="product-tag">Seasonal Special</span>
+                    <h3>Midi & Slacks Suits</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header">
+            <h2>Bulk B2B Ordering Desk</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-form-pane">
+                <h3>Initiate Commercial Order Request</h3>
+                <form id="b2b-form" onsubmit="event.preventDefault(); alert('Request logged. Corporate team will verify credentials within 12 business hours.');">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="comp-name">Company Name</label>
+                            <input type="text" id="comp-name" placeholder="Ex: ABC Enterprises" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="buyer-gst">GST Number / Registration</label>
+                            <input type="text" id="buyer-gst" placeholder="Optional for inquiry">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-p">Contact Person</label>
+                            <input type="text" id="contact-p" placeholder="Your Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-e">Business Email</label>
+                            <input type="email" id="contact-e" placeholder="name@company.com" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="order-cat">Target Distribution Category</label>
+                            <select id="order-cat">
+                                <option value="co-ord">Co-ord Sets Focus</option>
+                                <option value="palazzo">Palazzo & Pant Suits</option>
+                                <option value="capri">Capri & Skirt Suits</option>
+                                <option value="mix">Bulk Assorted Volume Mix</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="msg">Volume Specifics / Special Packaging Needs</label>
+                            <textarea id="msg" rows="5" placeholder="Outline size distribution mix requirements (Sizes 20 to 32 target metrics)..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Official Procurement Request</button>
+                </form>
+            </div>
+
+            <div class="contact-info-pane">
+                <h3>Corporate Headquarters</h3>
+                <div class="info-block">
+                    <h4>Postal Address</h4>
+                    <p><strong>Aay Vee International</strong><br>St. No. 11, Master Colony<br>New Shivpuri, Ludhiana – 141008<br>Punjab, India</p>
+                </div>
+                <div class="info-block">
+                    <h4>Central Communications Email</h4>
+                    <p><a href="mailto:realbabygirls@gmail.com" style="color:var(--secondary); font-weight:700;">realbabygirls@gmail.com</a></p>
+                </div>
+                <div class="info-block">
+                    <h4>Direct Operational Directorate</h4>
+                    <div class="person-node">
+                        <span class="person-name">Office Desk Line</span>
+                        <span class="person-phone"><a href="tel:+911614646633">+91 161 464 6633</a></span>
+                    </div>
+                    <div class="person-node">
+                        <span class="person-name">Arun Verma</span>
+                        <span class="person-phone"><a href="tel:+919815966333">+91 98159 66333</a></span>
+                    </div>
+                    <div class="person-node">
+                        <span class="person-name">Vinay Verma</span>
+                        <span class="person-phone"><a href="tel:+919478666333">+91 94786 66333</a></span>
+                    </div>
+                </div>
+
+                <div class="map-mock-container">
+                    <p style="font-weight:700; margin-bottom:5px;">Ludhiana Production Zone Core</p>
+                    <p style="font-size:0.8rem; opacity:0.7;">Maps Node: St. No. 11, New Shivpuri</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-secondary" style="padding:8px 16px; font-size:0.75rem; margin-top:15px;">Launch Navigation Map</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h2>AAY VEE INTERNATIONAL</h2>
+            <p>High-Capacity Girls Wear Production Systems</p>
+        </div>
+        <div class="footer-law">
+            <div>&copy; 2026 Aay Vee International. Brand Identity: Real Baby. All Rights Protected.</div>
+            <div>Manufacturing Hub: Ludhiana (Punjab), India</div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM ELEMENTS SELECTION
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const mainHeader = document.getElementById('main-header');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // MOBILE HAMBURGER TOGGLE LOGIC
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('toggle');
+        });
+
+        // SCROLL CONTROLLER ACTIONS
+        window.addEventListener('scroll', () => {
+            // Header Compression Control
+            if (window.scrollY > 80) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+
+            // Visible Section Viewport Trigger tracking & Active state linking
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 160;
+                if (window.scrollY >= sectionTop) {
+                    currentSectionId = section.getAttribute('id');
+                }
+                
+                // Trigger Fade-In Slide Transition
+                const sectionHeight = section.getBoundingClientRect().top;
+                if(sectionHeight < window.innerHeight - 100) {
+                    section.classList.add('visible');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(currentSectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // INTERACTIVE CATALOG CARDS FILTER ACTION
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Toggle state presentation UI
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const chosenFilter = btn.getAttribute('data-filter');
+
+                // Dynamic display controller
+                productCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (chosenFilter === 'all' || cardCategory === chosenFilter) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 50);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+
+        // Initialize First Loading Transition State
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('home').classList.add('visible');
+            }, 200);
+        });
+    </script>
+</body>
+</html>
